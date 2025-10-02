@@ -15,8 +15,6 @@
 
 - **Architecture:** `docs/ARCHITECTURE.md`
 - **Roadmap/Goals:** `docs/ROADMAP.md`
-- **Roles & Responsibilities:** `comms/roles/`
-
 
 ## 2. Dynamic State (Volatile)
 *These files and directories reflect the current status, recent work, and active tasks. The AI should check these to understand what's happening right now.*
