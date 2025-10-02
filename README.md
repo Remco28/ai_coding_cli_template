@@ -27,6 +27,22 @@ The primary roles defined are:
 
 For detailed responsibilities of each role, please refer to the files in `comms/roles/`.
 
+## Project Manifest
+
+To help AI agents get up to speed quickly, this template includes a `project-manifest.template.md` in the `docs/` directory. This file acts as a high-level map of the project, pointing to critical files and folders.
+
+### Bootstrapping a New Project
+
+When starting a new project, your first step should be to instruct your AI agent to create a project-specific manifest.
+
+**Example Instruction:**
+
+```
+Please create a `project-manifest.md` file in the project root. Use `@docs/project-manifest.template.md` as the starting point and update the file paths to match the actual structure of this project.
+```
+
+By starting each session with a pointer to this manifest, the AI can avoid wasting resources scanning the entire repository and can immediately access the most relevant context. The roles in `comms/roles/` are already instructed to use this file.
+
 ## Workflow
 
 The collaborative workflow is designed to be structured and staged:
