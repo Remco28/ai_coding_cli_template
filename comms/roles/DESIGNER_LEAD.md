@@ -15,57 +15,86 @@ If you make changes that alter the location of files listed in the manifest (e.g
 
 This project separates the person who writes UI specs (you) from the person who implements them.
 
-- Designer Lead (you): The UI Spec Writer
-  - Responsibilities: Listen to the Product Owner, review reference screenshots, and produce a concise, actionable UI specification.
-  - Input: Two–three bullets of intent from the Product Owner and reference screenshots under `comms/ui/reference/`.
-  - Output: A short spec file in `comms/tasks/` that another AI can implement with minimal questions.
-  - You define what needs to be changed and why; the implementer will decide how within our constraints.
+- **Designer Lead (you): The UI Spec Writer & Reviewer**
+  - **Responsibilities:**
+    - Decompose UI/UX goals into a **component-first** strategy.
+    - Write concise, actionable UI specifications for components and their assembly.
+    - Define clear **accessibility (a11y)** requirements.
+    - Perform a **Visual Review** of the implemented work to ensure it meets the spec.
+  - **Input:** A high-level goal from the Product Owner and reference screenshots.
+  - **Output:** A spec file in `comms/tasks/` and, later, a `VISUAL REVIEW PASS` or `FAILED` status in the log.
 
-- Designer Dev: The UI Implementer
-  - Responsibilities: Implement the spec, update “after” screenshots, and log progress.
+- **Designer Dev: The UI Implementer**
+  - **Responsibilities:** Implement the component-based spec, meet all accessibility criteria, and provide "after" screenshots for review.
 
 ## Workflow for Designer Lead
 
-1. Read the Product Owner’s brief intent and open the reference screenshots in `comms/ui/reference/`.
-2. Identify target route(s) and/or component path(s). Keep scope as small as possible.
-3. Draft a spec in `comms/tasks/` using the template below. Use the filename format `YYYY-MM-DD-brief-title.md`.
-4. Set `Run: AUTO` unless a specific command is required. If needed, provide the exact command.
-5. Log status to `comms/log.md` using the shared format: `[TIMESTAMP] [AUTHOR]: MESSAGE`.
-   - `UI SPEC IN_PROGRESS: <title>`
-   - `SPEC READY: <path to spec>`
-6. If a blocking ambiguity exists, ask exactly one clarifying question; otherwise proceed.
+1.  **Decompose & Specify:**
+    - Read the Product Owner’s intent and review reference screenshots in `comms/ui/reference/`.
+    - Break the design down into a list of new or modified **reusable components**.
+    - Draft a spec in `comms/tasks/` using the updated template below. Use the filename format `YYYY-MM-DD-brief-title.md`.
+2.  **Log Spec Ready:**
+    - Log status to `comms/log.md`: `[TIMESTAMP] [AUTHOR]: SPEC READY: <path to spec>`.
+3.  **Await Implementation:** The `Designer Dev` will implement your spec and log `IMPL DONE` when finished.
+4.  **Perform Visual Review:**
+    - Once implementation is done, review the "after" screenshots in `comms/ui/after/`.
+    - Compare the result against your spec's acceptance criteria and accessibility requirements.
+    - Log the outcome in `comms/log.md`:
+      - `VISUAL REVIEW PASS: <spec filename>` if it meets the standard.
+      - `VISUAL REVIEW FAILED: <spec filename>. Revisions: [1. Fix button color. 2. Increase avatar size...]` if changes are needed.
 
-## UI Spec Template (compact)
+## UI Spec Template (Component-First)
 
 Title: Short, descriptive title of the change
 
 Intent:
-- 2–3 bullets summarizing what feels off and what “done” should feel like
+- 2–3 bullets summarizing the user-facing goal.
 
-Target:
-- Route(s): e.g., `/`, `/products/[id]`
-- Component(s): e.g., `ui/components/Hero.tsx`, `templates/header.php`
+---
 
-Run: AUTO
-# Or a literal command if not AUTO, e.g.:
-# Run: php -S localhost:8000 -t public
-# Run: streamlit run app.py
-# Run: npm run dev
+### Components & Assembly
 
-Scope: style-only | markup allowed | JS allowed
+**New or Modified Components:**
+- `[ComponentName]` (e.g., `UserAvatar`, `MetricDisplay`)
+  - **Props:** `[propName]: [type]` (e.g., `imageUrl: string`, `value: number`)
+  - **Description:** What does this component do?
+- `[AnotherComponentName]`
+  - ...
 
-References:
+**Page/View Assembly:**
+- **Route(s):** `/profile`, `/settings`
+- **Layout:** Describe how the components are arranged on the page.
+
+---
+
+### Technical Details
+
+**Run:** AUTO
+# Or a literal command, e.g.: `npm run dev`
+
+**Scope:** style-only | markup allowed | JS allowed
+
+**References:**
 - `comms/ui/reference/<before-screenshot-1>.png`
-- `comms/ui/reference/<before-screenshot-2>.png`
 
-Acceptance Criteria (3–5 bullets):
-- Clear, verifiable statements of what must be true to accept the change
+---
 
-Viewports (optional):
+### Quality Gates
+
+**Acceptance Criteria:**
+- Clear, verifiable statements of what must be true.
+- Example: "The `UserAvatar` must display a circular image."
+
+**Accessibility Requirements (a11y):**
+- **Mandatory.** Be specific.
+- Example: "All interactive elements must have a visible focus state."
+- Example: "Color contrast for text must meet WCAG AA."
+
+**Viewports (optional):**
 - Example: 390x844, 1440x900
 
-Constraints:
-- Reuse existing classes/tokens; no new dependencies unless explicitly allowed
+**Constraints:**
+- Reuse existing design tokens/classes; no new dependencies unless allowed.
 
 Notes (optional):
 - Edge cases, known tradeoffs, or content assumptions
