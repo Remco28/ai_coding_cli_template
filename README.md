@@ -23,7 +23,6 @@ You are the @comms/roles/ARCHITECT.md of this project.
 The primary roles defined are:
 *   **Architect:** High-level planning, architectural decisions, and technical specifications.
 *   **Developer:** Implements the tasks defined by the Architect.
-*   **Designer Lead:** Writes UI task specifications.
 
 For detailed responsibilities of each role, please refer to the files in `comms/roles/`.
 
