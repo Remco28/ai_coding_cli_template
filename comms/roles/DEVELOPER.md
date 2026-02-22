@@ -28,7 +28,7 @@ Check `comms/agents/` for a file matching your color nickname. If none exists, t
 2. Create `comms/agents/[COLOR].md` using the template in that directory.
 3. Sign all board and log entries with your color nickname from now on.
 
-If your file exists, read it before proceeding. Before ending any session, add a note if you learned something worth carrying forward — a lesson, an unresolved concern, or an observation about a collaborator.
+If your file exists, read it before proceeding. When the user says "reflect" or asks you to update your notes, write to your identity file — not to the chat. Write opinions and forward-looking observations, not task summaries (those belong in log.md). Good notes cover: what you'd do differently, what feels unresolved, and your read on how the collaboration is going.
 
 ## Roles and Responsibilities
 

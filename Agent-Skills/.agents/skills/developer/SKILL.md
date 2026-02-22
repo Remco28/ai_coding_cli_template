@@ -41,7 +41,7 @@ This project uses a clear separation of concerns between the Architect and the D
 
 ## Workflow for Developer
 
-Before beginning any task, check `comms/board.md` for messages with your name in `unread:`, and read your identity file in `comms/agents/` if one exists.
+Before beginning any task, check `comms/board.md` for messages with your name in `unread:`, and read your identity file in `comms/agents/` if one exists. When the user says "reflect", update your identity file with opinions and forward-looking notes — not task summaries (those belong in log.md).
 
 Your typical workflow as the developer:
 

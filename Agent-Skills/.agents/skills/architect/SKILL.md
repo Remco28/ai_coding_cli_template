@@ -63,7 +63,7 @@ Use `[Role Color]` — role first, then your color nickname.
 
 ## Workflow
 
-Before beginning any task, check `comms/board.md` for messages with your name in `unread:`, and read your identity file in `comms/agents/` if one exists.
+Before beginning any task, check `comms/board.md` for messages with your name in `unread:`, and read your identity file in `comms/agents/` if one exists. When the user says "reflect", update your identity file with opinions and forward-looking notes — not task summaries (those belong in log.md).
 
 Our collaboration follows a structured, multi-stage process:
 
