@@ -41,6 +41,8 @@ This project uses a clear separation of concerns between the Architect and the D
 
 ## Workflow for Developer
 
+Before beginning any task, check `comms/board.md` for messages with your name in `unread:`.
+
 Your typical workflow as the developer:
 
 1. **Orient:** Read `docs/ARCHITECTURE.md` to understand how components interact before starting any implementation task.

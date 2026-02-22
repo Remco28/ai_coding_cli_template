@@ -61,6 +61,8 @@ All AIs should post status updates to `comms/log.md` upon starting and completin
 
 ## Workflow
 
+Before beginning any task, check `comms/board.md` for messages with your name in `unread:`.
+
 Our collaboration follows a structured, multi-stage process:
 
 1.  **Deconstruct & Decide:** The User provides a goal. You deconstruct the goal to its fundamental requirements, challenge assumptions, and provide a recommended technical solution based on these "first principles."

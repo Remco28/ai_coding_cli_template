@@ -2,62 +2,113 @@
 
 ## Overview
 
-This repository is a template to serve as a starting point when working with AI coding tools like Gemini CLI, Claude Code CLI, Codex CLI, Grok, etc.
+A starting point for projects that use AI coding agents collaboratively. It provides:
 
-The main idea is to provide a structured environment for interacting with AI agents by:
-1.  **Assigning Roles:** Defining specific roles for different AI agents to encourage them to adhere to instructions.
-2.  **Communication Protocol:** Providing a clear folder structure for communication between agents and for persisting context across sessions.
+1. **Roles:** Defined personas for AI agents covering planning, implementation, and advisory.
+2. **Skills:** Cross-tool skill files compatible with Claude Code, Codex CLI, and Gemini CLI.
+3. **Communication:** A shared message board and progress log so agents stay in sync without the user acting as a go-between.
+
+---
 
 ## Roles
 
-This template includes pre-defined roles in the `comms/roles/` directory. While you can rename or modify these roles (e.g., `AGENTS.md`, `CLAUDE.md`), the intention is to assign a role to an AI agent at the beginning of a session.
-
-### Example
-
-To assign a role to an agent, you can instruct it like this:
+Three roles are defined in `comms/roles/`. Assign a role to an agent at the start of a session:
 
 ```
 You are the @comms/roles/ARCHITECT.md of this project.
 ```
 
-The primary roles defined are:
-*   **Architect:** High-level planning, architectural decisions, and technical specifications.
-*   **Developer:** Implements the tasks defined by the Architect.
+| Role | Purpose | Output |
+|---|---|---|
+| **Architect** | Planning, architecture decisions, spec writing, code review | Task specification files |
+| **Developer** | Implements specs from `comms/tasks/` | Production code |
+| **TechAdvisor** | Situational independent review — risk assessment, strategic sanity checks | Advisory notes |
 
-For detailed responsibilities of each role, please refer to the files in `comms/roles/`.
+The Architect and Developer are continuous roles used throughout the project lifecycle. The TechAdvisor is situational — brought in before committing to a spec, mid-implementation when something feels off, or pre-release.
+
+---
+
+## Skills
+
+`Agent-Skills/` contains cross-tool skill files following the [Agent Skills open standard](https://agentskills.io). Skills work across Claude Code (`/architect`), Codex CLI (`$architect`), and Gemini CLI (auto-activation).
+
+### Deploying to a project
+
+Copy `.agents/` to the **project root** — not into a subdirectory:
+
+```bash
+cp -r Agent-Skills/.agents /path/to/your-project/
+```
+
+Skills must be at or above the working directory to be discovered. See `Agent-Skills/README.md` for full details on descriptions, token budgets, and tool-specific configuration.
+
+---
+
+## Message Board
+
+Agents communicate asynchronously via `comms/board.md` — a shared message board that replaces the user as go-between. Every agent checks the board at the start of each session before doing anything else.
+
+- **Directed messages:** use `@ARCHITECT`, `@DEVELOPER`, `@TECHADVISOR`
+- **Broadcast:** post without an @mention — all agents see it
+- **Read receipts:** agents add their name to `read:` after processing a message
+- **Threshold:** 20 messages. Oldest are pruned to `board-archive.md`. Any message containing a decision must be formalized in `docs/` before pruning.
+
+The board is working memory. Anything worth keeping long-term belongs in `docs/`.
+
+---
 
 ## Project Manifest
 
-To help AI agents get up to speed quickly, this template includes a `project-manifest.template.md` in the `docs/` directory. This file acts as a high-level map of the project, pointing to critical files and folders.
-
-### Bootstrapping a New Project
-
-When starting a new project, your first step should be to instruct your AI agent to create a project-specific manifest.
-
-**Example Instruction:**
+`docs/project-manifest.template.md` is a high-level map of the project that helps agents orient quickly without scanning the entire repository. Bootstrap it at the start of a new project:
 
 ```
-Please create a `project-manifest.md` file in the project root. Use `@docs/project-manifest.template.md` as the starting point and update the file paths to match the actual structure of this project.
+Please create a project-manifest.md in the project root using
+@docs/project-manifest.template.md as the starting point.
 ```
 
-By starting each session with a pointer to this manifest, the AI can avoid wasting resources scanning the entire repository and can immediately access the most relevant context. The roles in `comms/roles/` are already instructed to use this file.
+All role files are already instructed to consult this file at session start.
+
+---
 
 ## Workflow
 
-The collaborative workflow is designed to be structured and staged:
+```
+[TechAdvisor]  →  pre-spec sanity check (optional)
+[Architect]    →  deconstruct goal, write spec to comms/tasks/
+[Architect]    →  log SPEC READY to comms/log.md
+[Developer]    →  read spec, log IMPL IN_PROGRESS, implement, log IMPL DONE
+[Architect]    →  review implementation, archive spec to comms/tasks/archive/
+[TechAdvisor]  →  pre-release review (optional)
+```
 
-1.  **Discuss & Decide:** The User provides a goal. The Architect provides analysis and a technical solution.
-2.  **Specify:** The Architect creates a task specification file in `comms/tasks/`.
-3.  **Log Status:** The Architect updates `comms/log.md` to indicate the specification is ready.
-4.  **Execute:** The User passes the specification to the Developer for implementation.
-5.  **Review & Archive:** The Architect reviews the implementation. If it passes, the task is archived to `comms/tasks/archive/`.
+Agents post questions and blockers to `comms/board.md` rather than waiting on the user to relay information. The user's role is to route — telling the next agent to check the board — not to repeat what was said.
+
+---
 
 ## Directory Structure
 
-The `comms/` directory is the central hub for this workflow:
-
--   `comms/log.md`: A shared log file for status updates between agents.
--   `comms/roles/`: Contains role definitions for the AI agents.
--   `comms/tasks/`: Contains the specification for the **current** task.
--   `comms/tasks/archive/`: Contains specifications for all **completed** tasks.
--   `docs/`: Contains project documentation, including architecture documents.
+```
+comms/
+  board.md              # Shared agent message board
+  board-archive.md      # Pruned messages
+  log.md                # Structured status log (SPEC READY, IMPL DONE, etc.)
+  roles/
+    ARCHITECT.md
+    DEVELOPER.md
+    TECHADVISOR.md
+  tasks/                # Current task specifications (YYYY-MM-DD-description.md)
+    archive/            # Completed specifications
+docs/
+  project-manifest.template.md
+  ARCHITECTURE.template.md
+Agent-Skills/
+  .agents/
+    skills/
+      architect/
+        SKILL.md
+      developer/
+        SKILL.md
+      techadvisor/
+        SKILL.md
+  README.md             # Skills deployment guide
+```

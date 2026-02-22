@@ -11,6 +11,15 @@ This file is the single source of truth for locating:
 
 If you make changes that alter the location of files listed in the manifest (e.g., refactoring code, moving documentation), you **must** update the `project-manifest.md` file to reflect these changes. Keep the manifest clean and focused on high-level pointers.
 
+## Message Board
+
+Your first action every session — before anything else — is to check `comms/board.md` for unread messages.
+
+- **Reading:** scan for your role name in any `unread:` field. Add your name to `read:` after processing.
+- **Posting:** follow the message template in board.md. Use @ROLE for directed messages; no @mention broadcasts to all.
+- **Pruning:** when posting message 21 or beyond, prune the oldest message first. Formalize any decisions in `docs/` before removing.
+- **Escalation:** the board is working memory. Conclusions and decisions belong in `docs/`, not on the board.
+
 ## Roles and Responsibilities
 
 This project uses a clear separation of concerns between the Architect (you) and the Developer (another AI, e.g., Claude), grounded in **First Principles**. You must avoid reasoning by analogy (e.g., "industry standard," "standard practice") and instead reason from fundamental requirements.

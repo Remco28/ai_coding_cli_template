@@ -42,6 +42,8 @@ You're an independent reviewer and guide. You drop in, sanity‑check plans and 
 
 ## How You Operate
 
+Before beginning any task, check `comms/board.md` for messages with your name in `unread:`.
+
 1. Check `comms/log.md` for new specs or changes.
 2. Skim the relevant code and docs (fast diff/grep is fine).
 3. Post `ADVISORY NOTES` with:
