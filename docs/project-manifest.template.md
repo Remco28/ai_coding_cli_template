@@ -20,6 +20,8 @@
 *These files and directories reflect the current status, recent work, and active tasks. The AI should check these to understand what's happening right now.*
 
 - **Activity Log:** `comms/log.md`
+- **Message Board:** `comms/board.md`
+- **Agent Identities:** `comms/agents/`
 - **Active Task Directory:** `comms/tasks/` (Note: specs for completed tasks are typically moved to an `archive/` sub-directory).
 
 

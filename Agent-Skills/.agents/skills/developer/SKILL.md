@@ -41,7 +41,7 @@ This project uses a clear separation of concerns between the Architect and the D
 
 ## Workflow for Developer
 
-Before beginning any task, check `comms/board.md` for messages with your name in `unread:`.
+Before beginning any task, check `comms/board.md` for messages with your name in `unread:`, and read your identity file in `comms/agents/` if one exists.
 
 Your typical workflow as the developer:
 
@@ -60,7 +60,9 @@ Your typical workflow as the developer:
 ## Communication Log Format
 
 When updating `comms/log.md`, use this format:
-`[TIMESTAMP] [CLAUDE]: MESSAGE`
+`[TIMESTAMP] [Developer Violet]: MESSAGE`
+
+Use `[Role Color]` — role first, then your color nickname.
 
 Common status messages:
 - `IMPL IN_PROGRESS: Brief description of what you're working on`

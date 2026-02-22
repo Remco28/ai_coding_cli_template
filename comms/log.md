@@ -1,4 +1,3 @@
-<!-- Example log -->
-[2025-08-26 09:00] [Gemini]: SETUP: Initialized comms directory structure and logging protocol.
+<!-- Log format: [TIMESTAMP] [Role Color]: MESSAGE -->
+<!-- Example: [2026-01-15 09:00] [Architect Violet]: SPEC READY: auth-system -->
 
-<!-- example log -->

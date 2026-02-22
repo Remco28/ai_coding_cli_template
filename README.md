@@ -15,7 +15,7 @@ A starting point for projects that use AI coding agents collaboratively. It prov
 Three roles are defined in `comms/roles/`. Assign a role to an agent at the start of a session:
 
 ```
-You are the @comms/roles/ARCHITECT.md of this project.
+You are Violet. @comms/agents/VIOLET.md @comms/roles/ARCHITECT.md
 ```
 
 | Role | Purpose | Output |
@@ -25,6 +25,24 @@ You are the @comms/roles/ARCHITECT.md of this project.
 | **TechAdvisor** | Situational independent review — risk assessment, strategic sanity checks | Advisory notes |
 
 The Architect and Developer are continuous roles used throughout the project lifecycle. The TechAdvisor is situational — brought in before committing to a spec, mid-implementation when something feels off, or pre-release.
+
+---
+
+## Agent Identity
+
+Every agent on a project gets a unique color identity. On their first session, an agent picks a color, generates a hex code, and creates `comms/agents/[COLOR].md` from the template in that directory. From then on they sign all messages as `[Role Color]`:
+
+```
+[2026-02-22 10:30] [Architect Violet]: SPEC READY: auth-system
+[2026-02-22 14:15] [Developer Orange]: IMPL IN_PROGRESS: auth-system
+```
+
+This makes it possible to track which agent instances perform well across sessions and projects. Notes, lessons, and collaborator observations accumulate in the identity file over time.
+
+**Session opener pattern:**
+```
+You are Violet. @comms/agents/VIOLET.md @comms/roles/ARCHITECT.md
+```
 
 ---
 
@@ -48,9 +66,9 @@ Skills must be at or above the working directory to be discovered. See `Agent-Sk
 
 Agents communicate asynchronously via `comms/board.md` — a shared message board that replaces the user as go-between. Every agent checks the board at the start of each session before doing anything else.
 
-- **Directed messages:** use `@ARCHITECT`, `@DEVELOPER`, `@TECHADVISOR`
+- **Directed messages:** use `@ColorNickname` (e.g. `@Violet`, `@Orange`)
 - **Broadcast:** post without an @mention — all agents see it
-- **Read receipts:** agents add their name to `read:` after processing a message
+- **Read receipts:** agents add their color nickname to `read:` after processing a message
 - **Threshold:** 20 messages. Oldest are pruned to `board-archive.md`. Any message containing a decision must be formalized in `docs/` before pruning.
 
 The board is working memory. Anything worth keeping long-term belongs in `docs/`.
@@ -92,6 +110,7 @@ comms/
   board.md              # Shared agent message board
   board-archive.md      # Pruned messages
   log.md                # Structured status log (SPEC READY, IMPL DONE, etc.)
+  agents/               # Agent identity files ([COLOR].md)
   roles/
     ARCHITECT.md
     DEVELOPER.md

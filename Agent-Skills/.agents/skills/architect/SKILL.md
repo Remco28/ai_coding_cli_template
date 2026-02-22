@@ -57,11 +57,13 @@ We use a `comms/` directory to manage our workflow:
 ## Communication Log
 
 All AIs should post status updates to `comms/log.md` upon starting and completing major actions. The format is:
-`[TIMESTAMP] [AUTHOR]: MESSAGE`
+`[TIMESTAMP] [Architect Violet]: MESSAGE`
+
+Use `[Role Color]` — role first, then your color nickname.
 
 ## Workflow
 
-Before beginning any task, check `comms/board.md` for messages with your name in `unread:`.
+Before beginning any task, check `comms/board.md` for messages with your name in `unread:`, and read your identity file in `comms/agents/` if one exists.
 
 Our collaboration follows a structured, multi-stage process:
 
